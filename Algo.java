@@ -84,7 +84,7 @@ class Merge
         Merge_Sort(_Arr , 0 , _Arr.length - 1);
     }
 
-    void Finally_merge ()
+    int[] Finally_merge ()
     {
         System.out.println("Welcome To Our Small Algorithm Analysis Application");
         int Arr[];
@@ -101,6 +101,7 @@ class Merge
             System.out.printf("%d " , Arr[i]);
         }
         System.out.println("The Time Of Merge Method is O(n (log n))");
+        return Arr;
     }
 }
 
@@ -129,7 +130,7 @@ class Insertion_sort
         }
     }
 
-    void Finally_Insertion ()
+    int[] Finally_Insertion ()
     {
         System.out.println("Welcome To Our Small Algorithm Analysis Application");
         int Arr[];
@@ -146,6 +147,7 @@ class Insertion_sort
             System.out.printf("%d " , Arr[i]);
         }
         System.out.println("The Time Of Insertion Method is O(n²)");
+        return Arr;
     }
 }
 
@@ -174,7 +176,7 @@ class BubbleSort
         }
     }
 
-    void Finally_BuB ()
+    int[] Finally_BuB ()
     {
         System.out.println("Welcome To Our Small Algorithm Analysis Application");
         int Arr[];
@@ -191,6 +193,7 @@ class BubbleSort
             System.out.printf("%d " , Arr[i]);
         }
         System.out.println("The Time Of BubbleSort Method is O(n²)");
+        return Arr;
     }
 }
 
@@ -230,14 +233,26 @@ class Search
     }
 }
 
+class PerformanceAnalyzer 
+{
+    static void measureTime(Runnable algorithm, String algoName) 
+    {
+        long startTime = System.nanoTime();
+        algorithm.run();
+        long endTime = System.nanoTime();
+        System.out.println(" Execution time of " + algoName + " → " + (endTime - startTime) / 1e6 + " ms");
+    }
+}
+
 class MenuSystem 
 {
+    public static int[] sortedArray = null;  
     static void displayMenu() 
     {
         @SuppressWarnings("resource")
         Scanner ss = new Scanner(System.in);
         int choice;
-        
+
         do 
         {
             System.out.println("\n==========================================");
@@ -245,55 +260,100 @@ class MenuSystem
             System.out.println("==========================================");
             System.out.println("1️⃣ Perform Merge Sort");
             System.out.println("2️⃣ Perform Insertion Sort");
-            System.out.println("3️⃣ Perform Binary Search");
-            System.out.println("4️⃣ Perform Linear Search");
-            System.out.println("5️⃣ Exit");
+            System.out.println("3️⃣ Perform Bubble Sort");
+            System.out.println("4️⃣ Exit");
             System.out.println("==========================================");
-            System.out.print("👉 Enter your choice: ");
+            System.out.print("👉 Choose a sorting method: ");
             
             choice = ss.nextInt();
-
+    
             switch (choice) 
             {
                 case 1:
                     Merge mSort = new Merge();
-                    mSort.Finally_merge();
-                    break;
+                    sortedArray = mSort.Finally_merge(); 
+                break;
                 case 2:
                     Insertion_sort iSort = new Insertion_sort();
-                    iSort.Finally_Insertion();
+                    sortedArray = iSort.Finally_Insertion(); 
                     break;
                 case 3:
-                    Search binarySearch = new Search();
-                    System.out.print("Enter number to search: ");
-                    int num = ss.nextInt();
-                    int[] sortedArray = {10, 20, 30, 40, 50};  
-                    int index = binarySearch.Binary_Search(sortedArray, num);
-                    System.out.println(index == -1 ? "❌ Element not found" : "✅ Found at index: " + index);
-                    break;
-                case 4:
-                    Search linearSearch = new Search();
-                    System.out.print("Enter number to search: ");
-                    num = ss.nextInt();
-                    int[] arr = {5, 15, 25, 35, 45};
-                    int pos = linearSearch.Linear_Search(arr, num);
-                    System.out.println(pos == -1 ? "❌ Element not found" : "✅ Found at index: " + pos);
-                    break;
-                case 5:
                     System.out.println("🚀 Exiting the program... Goodbye!");
-                    break;
+                    return;  
                 default:
-                    System.out.println("⚠️ Invalid choice! Please enter a number between 1-5.");
+                    System.out.println("⚠️ Invalid choice! Please enter 1, 2, or 3.");
+                    continue;
             }
-        } while (choice != 5);
+
+            if (sortedArray != null) 
+            {
+                performSearch(sortedArray);
+            }
+        } while (true);
     }
+    
+        // Search menu after sorting
+        static void performSearch(int[] sortedArray) 
+        {
+            @SuppressWarnings("resource")
+            Scanner ss = new Scanner(System.in);
+            int searchChoice;
+    
+            do 
+            {
+                System.out.println("\n==========================================");
+                System.out.println(" 🔍 Choose a Searching Method 🔍");
+                System.out.println("==========================================");
+                System.out.println("1️⃣ Binary Search");
+                System.out.println("2️⃣ Linear Search");
+                System.out.println("3️⃣ Return to Main Menu");
+                System.out.println("==========================================");
+                System.out.print("👉 Enter your choice: ");
+    
+                searchChoice = ss.nextInt();
+    
+                switch (searchChoice) 
+                {
+                    case 1:
+                        Search binarySearch = new Search();
+                        System.out.print("Enter number to search: ");
+                        int num = ss.nextInt();
+                        int index = binarySearch.Binary_Search(sortedArray, num);
+                        System.out.println(index == -1 ? " Element not found" : " Found at index: " + index);
+                        System.out.println("Binary Search Method is log(n)");
+                        // measureTime(,"binarySearch");
+                        break;
+                    case 2:
+                        Search linearSearch = new Search();
+                        System.out.print("Enter number to search: ");
+                        num = ss.nextInt();
+                        int pos = linearSearch.Linear_Search(sortedArray, num);
+                        System.out.println(pos == -1 ? " Element not found" : " Found at index: " + pos);
+                        System.out.println("Linear Search Method is (n)");
+                        break;
+                    case 3:
+                        return;
+                    default:
+                        System.out.println(" Invalid choice! Please enter 1, 2, or 3.");
+                }
+            } while (true);
+        }
+    
+        void MainMenu ()
+        {
+            displayMenu();
+            performSearch(sortedArray);
+        }
 }
+
+
+
 
 class Algo  
 {
     public static void main (String []argv)
     {
-        Insertion_sort M1 = new Insertion_sort();
-        M1.Finally_Insertion();
+        MenuSystem mn = new MenuSystem();
+        mn.MainMenu();
     }
 }
