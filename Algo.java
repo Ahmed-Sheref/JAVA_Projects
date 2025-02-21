@@ -346,9 +346,6 @@ class MenuSystem
         }
 }
 
-
-
-
 class Algo  
 {
     public static void main (String []argv)
