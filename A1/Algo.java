@@ -12,6 +12,7 @@ class input
         int number;
         for (int i = 0; i < siz; i++)
         {
+            System.out.printf("number [%d] -> ", i + 1);
             number = INPUT.nextInt();
             Arr[i] = number;
         }
@@ -256,14 +257,14 @@ class MenuSystem
         do 
         {
             System.out.println("\n==========================================");
-            System.out.println(" 🔥 Algorithm Analysis Tool - Main Menu 🔥");
+            System.out.println("  Algorithm Analysis Tool - Main Menu ");
             System.out.println("==========================================");
-            System.out.println("1️⃣ Perform Merge Sort");
-            System.out.println("2️⃣ Perform Insertion Sort");
-            System.out.println("3️⃣ Perform Bubble Sort");
-            System.out.println("4️⃣ Exit");
+            System.out.println("1️ Perform Merge Sort");
+            System.out.println("2️ Perform Insertion Sort");
+            System.out.println("3️ Perform Bubble Sort");
+            System.out.println("4️ Exit");
             System.out.println("==========================================");
-            System.out.print("👉 Choose a sorting method: ");
+            System.out.print(" Choose a sorting method: ");
             
             choice = ss.nextInt();
     
@@ -278,10 +279,14 @@ class MenuSystem
                     sortedArray = iSort.Finally_Insertion(); 
                     break;
                 case 3:
+                    BubbleSort BSort = new BubbleSort();
+                    sortedArray = BSort.Finally_BuB(); 
+                    break;  
+                case 4:
                     System.out.println("🚀 Exiting the program... Goodbye!");
                     return;  
                 default:
-                    System.out.println("⚠️ Invalid choice! Please enter 1, 2, or 3.");
+                    System.out.println(" Invalid choice! Please enter 1, 2,3 or 4.");
                     continue;
             }
 
@@ -304,9 +309,9 @@ class MenuSystem
                 System.out.println("\n==========================================");
                 System.out.println(" 🔍 Choose a Searching Method 🔍");
                 System.out.println("==========================================");
-                System.out.println("1️⃣ Binary Search");
-                System.out.println("2️⃣ Linear Search");
-                System.out.println("3️⃣ Return to Main Menu");
+                System.out.println("1️ Binary Search");
+                System.out.println("2️ Linear Search");
+                System.out.println("3️ Return to Main Menu");
                 System.out.println("==========================================");
                 System.out.print("👉 Enter your choice: ");
     
