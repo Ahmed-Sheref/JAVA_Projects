@@ -1,5 +1,5 @@
-import java.util.Scanner;
 import java.util.Random;
+import java.util.Scanner;
 
 class input 
 {
@@ -359,7 +359,8 @@ class MenuSystem
             searchChoice = ss.nextInt();
             switch (searchChoice) 
             {
-                case 1:
+                case 1 -> 
+                {
                     Search binarySearch = new Search();
                     System.out.print("Enter number to search: ");
                     int num = ss.nextInt();
@@ -367,22 +368,22 @@ class MenuSystem
                     System.out.println("Time Binary Search -> O(log n)");
                     // PerformanceAnalyzer.measureTime(() -> Binary_Search(sortedArray ,num), "Binary_Search Sort");
                     System.out.println(index == -1 ? " Element not found" : " Found at index: " + index);
-                    break;
-                case 2:
+                }
+                case 2 -> 
+                {
                     Search linearSearch = new Search();
                     System.out.print("Enter number to search: ");
-                    num = ss.nextInt();
+                    int num = ss.nextInt();
                     int pos = linearSearch.Linear_Search(sortedArray, num);
                     System.out.println("Time Linear Search -> O(n)");
                     System.out.println(pos == -1 ? " Element not found" : " Found at index: " + pos);
-                    break;
-                case 3:
-                    showSearchTimeComplexityTable();
-                    break;
-                case 4:
+                }
+                case 3 -> showSearchTimeComplexityTable();
+                case 4 -> 
+                {
                     return;
-                default:
-                    System.out.println(" Invalid choice! Please enter 1, 2, 3 or 4.");
+                }
+                default -> System.out.println(" Invalid choice! Please enter 1, 2, 3 or 4.");
             }
         } while (true);
     }
@@ -419,6 +420,7 @@ class MenuSystem
     }
 }
 
+@SuppressWarnings("unused")
 class Algo 
 {
     public static void main(String[] argv) 
